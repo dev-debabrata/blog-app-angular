@@ -1,1 +1,69 @@
-<p>home works!</p>
+<app-hero />
+
+<section class="section">
+  <div class="section-header">
+    <h2>Why Choose CodeBreeze?</h2>
+    <p>Everything you need to write, learn, and grow as a developer.</p>
+  </div>
+  <div class="features">
+    <div class="feature-card">
+      <h3>Write Easily</h3>
+      <p>Create and publish your coding posts quickly.</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>Read Articles</h3>
+      <p>Explore useful developer content.</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>Grow Skills</h3>
+      <p>Learn from practical examples.</p>
+    </div>
+
+    <!-- <div class="feature-card">
+      <h3>Join Community</h3>
+      <p>Connect with developers and share ideas.</p>
+    </div> -->
+  </div>
+</section>
+
+<section class="home-posts">
+  <h2>Latest Posts</h2>
+  <app-post-list [limit]="8"></app-post-list>
+
+  <div class="view-all-posts">
+    <a routerLink="/posts">View All Posts</a>
+  </div>
+</section>
+
+<section class="testimonials">
+  <h2>What Developers Say</h2>
+
+  <div class="testimonial-cards">
+    <div class="card">
+      <p>"CodeBreeze helped me improve my coding skills!"</p>
+      <h4>- Alex</h4>
+    </div>
+
+    <div class="card">
+      <p>"Great platform to share knowledge and learn."</p>
+      <h4>- Priya</h4>
+    </div>
+
+    <div class="card">
+      <p>"Clean UI and very easy to use."</p>
+      <h4>- John</h4>
+    </div>
+  </div>
+</section>
+
+<section class="newsletter">
+  <h2>Stay Updated</h2>
+  <p>Get latest posts directly in your inbox.</p>
+
+  <div class="newsletter-form">
+    <input type="email" placeholder="Enter your email" />
+    <button>Subscribe</button>
+  </div>
+</section>
