@@ -46,27 +46,6 @@ export class PostList {
         this.isLoading.set(false);
       },
     });
-    // const postSub = this.postService.getPosts().subscribe({
-    //   next: (res: any) => {
-    //     const postsArray: Post[] = Array.isArray(res) ? res : (res.posts ?? []);
-
-    //     // Sort by latest ID
-    //     const sorted = postsArray.sort((a, b) => b.id - a.id);
-
-    //     // Apply limit
-    //     this.posts = this.limit ? sorted.slice(0, this.limit) : sorted;
-    //     this.isLoading = false;
-
-    //     console.log(this.posts);
-    //     // this.posts = res.posts;
-    //     // console.log(res);
-    //   },
-    //   error: (err) => {
-    //     this.errorMsg = true;
-    //     this.isLoading = false;
-    //     console.error('Something went to wrong!');
-    //   },
-    // });
 
     // Automatically Component Destroyed
     this.destroyRef.onDestroy(() => {

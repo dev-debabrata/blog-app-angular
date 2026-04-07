@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -18,6 +18,8 @@ export class PostDetail {
   public router = inject(Router);
   private postService = inject(PostService);
 
+  private destroyRef = inject(DestroyRef);
+
   post: any = null;
   isLoading = signal(true);
   errorMsg = signal(false);
@@ -29,7 +31,7 @@ export class PostDetail {
       return;
     }
 
-    this.postService.getPostById(id).subscribe({
+    const postDetailSub = this.postService.getPostById(id).subscribe({
       next: (res) => {
         this.post = res;
         this.isLoading.set(false);
@@ -41,6 +43,10 @@ export class PostDetail {
         this.router.navigate(['/posts']);
         console.log(err);
       },
+    });
+
+    this.destroyRef.onDestroy(() => {
+      postDetailSub.unsubscribe();
     });
   }
 }

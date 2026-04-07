@@ -20,6 +20,12 @@ export class App {
   hideBreadcrumb = false;
 
   constructor() {
+    // const nav = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
+
+    // if (nav?.type === 'reload') {
+    //   this.router.navigate(['/']);
+    // }
+
     // if (performance.navigation.type === 1) {
     //   this.router.navigate(['/']);
     // }
