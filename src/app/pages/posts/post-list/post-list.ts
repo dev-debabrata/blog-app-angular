@@ -1,11 +1,11 @@
-import { Component, DestroyRef, inject, Input, signal } from '@angular/core';
+import { Component, DestroyRef, inject, Input, OnInit } from '@angular/core';
 import { SlicePipe } from '@angular/common';
 import { Router } from '@angular/router';
 
 import { PostService } from '../../../services/post-service';
 import { Post } from '../../../models/post-model';
-import { Loader } from '../../../shared/loader/loader';
-import { Error } from '../../../shared/error/error';
+import { Loader } from '../../../components/loader/loader';
+import { Error } from '../../../components/error/error';
 
 @Component({
   selector: 'app-post-list',
@@ -14,7 +14,7 @@ import { Error } from '../../../shared/error/error';
   templateUrl: './post-list.html',
   styleUrl: './post-list.css',
 })
-export class PostList {
+export class PostList implements OnInit {
   @Input() limit?: number;
 
   private postService = inject(PostService);
@@ -23,27 +23,29 @@ export class PostList {
   private destroyRef = inject(DestroyRef);
 
   posts: Post[] = [];
-  isLoading = signal(true);
-  errorMsg = signal(false);
+  isLoading = true;
+  errorMsg = false;
 
   ngOnInit(): void {
     const postSub = this.postService.getPosts().subscribe({
-      next: (res: { posts: Post[] }) => {
-        console.log('API Response:', res);
+      next: (res: any) => {
+        const postsArray: Post[] = Array.isArray(res) ? res : (res.posts ?? []);
 
-        this.posts = res.posts.sort((a: Post, b: Post) => b.id - a.id);
+        // Sort by latest ID
+        const sorted = postsArray.sort((a, b) => b.id - a.id);
 
-        if (this.limit) {
-          this.posts = this.posts.slice(0, this.limit);
-        }
+        // Apply limit
+        this.posts = this.limit ? sorted.slice(0, this.limit) : sorted;
+        this.isLoading = false;
 
-        this.isLoading.set(false);
+        console.log(this.posts);
+        // this.posts = res.posts;
+        // console.log(res);
       },
-
       error: (err) => {
-        console.error(err);
-        this.errorMsg.set(true);
-        this.isLoading.set(false);
+        this.errorMsg = true;
+        this.isLoading = false;
+        console.log(err);
       },
     });
 

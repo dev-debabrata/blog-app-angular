@@ -1,10 +1,10 @@
-import { Component, DestroyRef, inject, signal } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { PostService } from '../../../services/post-service';
-import { Loader } from '../../../shared/loader/loader';
-import { Error } from '../../../shared/error/error';
+import { Loader } from '../../../components/loader/loader';
+import { Error } from '../../../components/error/error';
 
 @Component({
   selector: 'app-post-detail',
@@ -21,26 +21,21 @@ export class PostDetail {
   private destroyRef = inject(DestroyRef);
 
   post: any = null;
-  isLoading = signal(true);
-  errorMsg = signal(false);
+  isLoading = true;
+  errorMsg = false;
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    if (!id) {
-      this.router.navigate(['/posts']);
-      return;
-    }
 
     const postDetailSub = this.postService.getPostById(id).subscribe({
       next: (res) => {
         this.post = res;
-        this.isLoading.set(false);
+        this.isLoading = false;
         console.log(res);
       },
       error: (err) => {
-        this.errorMsg.set(true);
-        this.isLoading.set(false);
-        this.router.navigate(['/posts']);
+        this.errorMsg = true;
+        this.isLoading = false;
         console.log(err);
       },
     });

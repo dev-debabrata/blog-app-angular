@@ -15,14 +15,12 @@
       </a>
     </div>
 
-    <!-- <h2 routerLink="/" routerLinkActive="active">CodeBreeze</h2> -->
     <h2>
       <a routerLink="/" class="brand">CodeBreeze</a>
     </h2>
 
     <div class="login-section">
       @if (!isLoggedIn) {
-        <!-- <button (click)="showLogin = true">Login</button> -->
         <a
           [routerLink]="isLoggedIn ? '/write' : '/login'"
           routerLinkActive="active"
@@ -30,8 +28,6 @@
           >Login</a
         >
       } @else {
-        <!-- <img (click)="logout()" src="/avatar.png" alt="" class="avatar-img" /> -->
-
         <div class="avatar-container">
           <img (click)="toggleMenu()" src="/avatar.png" alt="" class="avatar-img" />
 
@@ -41,8 +37,6 @@
             </div>
           }
         </div>
-
-        <!-- <button (click)="logout()">Logout</button> -->
       }
     </div>
   </div>
@@ -50,7 +44,6 @@
   <div class="navbar-item">
     <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
     <a routerLink="/posts" routerLinkActive="active">Posts</a>
-
     <a routerLink="/write" routerLinkActive="active">Write</a>
     <a routerLink="/about" routerLinkActive="active">About</a>
     <a routerLink="/contact" routerLinkActive="active">Contact</a>

@@ -1,13 +1,11 @@
-@if (isLoading()) {
+@if (isLoading) {
   <div class="post-container">
     <app-loader />
   </div>
-} @else if (errorMsg()) {
+} @else if (errorMsg) {
   <app-error />
 } @else {
   <div class="post-container">
-    <!-- <h1 class="page-title">Latest Posts</h1> -->
-
     <div class="post-grid">
       @for (post of posts; track post.id) {
         <div class="post-card">

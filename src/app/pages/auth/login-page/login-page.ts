@@ -19,8 +19,4 @@ export class LoginPage {
     localStorage.setItem('isLoggedIn', 'true');
     this.router.navigate(['/write']);
   }
-
-  // onLogin() {
-  //   console.log('Login:', this.email, this.password);
-  // }
 }

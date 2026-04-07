@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-
 import { Post } from '../../models/post-model';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-write',

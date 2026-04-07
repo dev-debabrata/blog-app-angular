@@ -5,13 +5,8 @@
 }
 
 .page-container {
-  /* min-height: 50vh; */
-  /* max-height: 100%; */
   background: #dee2e6;
   flex: 1;
-  /* display: flex;
-  flex-direction: column;
-  min-height: 100vh; */
 }
 
 .breadcrumb {

@@ -1,14 +1,14 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
+
 import { Navbar } from './components/navbar/navbar';
-import { Breadcrumb } from './components/breadcrumb/breadcrumb';
 import { Footer } from './components/footer/footer';
-import { filter, map } from 'rxjs';
+import { Breadcrumb } from './components/breadcrumb/breadcrumb';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, Navbar, Breadcrumb, Footer],
+  imports: [RouterOutlet, Navbar, Footer, Breadcrumb],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
@@ -20,16 +20,6 @@ export class App {
   hideBreadcrumb = false;
 
   constructor() {
-    // const nav = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
-
-    // if (nav?.type === 'reload') {
-    //   this.router.navigate(['/']);
-    // }
-
-    // if (performance.navigation.type === 1) {
-    //   this.router.navigate(['/']);
-    // }
-
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         let current = this.route.firstChild;
@@ -42,51 +32,14 @@ export class App {
         this.hideBreadcrumb = current?.snapshot.data['hideBreadcrumb'] ?? false;
       }
     });
-
-    ////////////////////////////
-
-    // const nav = window.performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
-
-    // if (nav?.type === 'reload') {
-    //   this.router.navigateByUrl('/');
-    // }
-
-    // this.router.events.subscribe((event) => {
-    //   if (event instanceof NavigationEnd) {
-    //     window.scrollTo({
-    //       top: 0,
-    //       behavior: 'instant',
-    //     });
-
-    //     let current = this.route.firstChild;
-
-    //     while (current?.firstChild) {
-    //       current = current.firstChild;
-    //     }
-
-    //     this.hideLayout = current?.snapshot.data['hideLayout'] ?? false;
-    //   }
-    // });
-
-    ////////////////////////////////
-
-    // if (window.performance.getEntriesByType('navigation')[0]?.type === 'reload') {
-    //   this.router.navigate(['/']);
-    // }
-
-    // this.router.events
-    //   .pipe(
-    //     filter((event) => event instanceof NavigationEnd),
-    //     map(() => {
-    //       let current = this.route.firstChild;
-    //       while (current?.firstChild) {
-    //         current = current.firstChild;
-    //       }
-    //       return current?.snapshot.data['hideLayout'] ?? false;
-    //     }),
-    //   )
-    //   .subscribe((value) => {
-    //     this.hideLayout = value;
-    //   });
   }
 }
+
+// const nav = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
+
+// if (nav?.type === 'reload') {
+//   this.router.navigate(['/']);
+// }
+// if (performance.navigation.type === 1) {
+//   this.router.navigate(['/']);
+// }
